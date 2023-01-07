@@ -16,7 +16,7 @@ const register = async(req, res)=>{
 
     const verificationToken = crypto.randomBytes(40).toString('hex')
     const user = await User.create({name, email, password, verificationToken})
-    const origin='http://localhost:3000'
+    const origin='https://authflow.onrender.com'
 
     await sendVerificationEmail({
         name:user.name,
@@ -118,7 +118,7 @@ const forgotPassword = async(req, res)=>{
     if(user){
         const passwordToken = crypto.randomBytes(70).toString('hex')
         //send email with reset password link
-        const origin = 'http://localhost:3000'
+        const origin = 'https://authflow.onrender.com'
         
         await sendResetPasswordEmail({name:user.name,email:user.email,passwordToken:passwordToken, origin} )
         const fifteenMinutes = 1000*60*15
